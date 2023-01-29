@@ -24,3 +24,7 @@ func (cs Clients) Find (id string) int {
 	})
 	return idx
 }
+
+func (c Client) ContainsURI (uri string) bool {
+	return slices.Contains(c.URIs, uri)
+}

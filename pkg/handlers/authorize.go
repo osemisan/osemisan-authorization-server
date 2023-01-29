@@ -19,4 +19,17 @@ func AuthorizeHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+
+	c := clients.OsemisanClients[idx]
+
+	uri := r.FormValue("redirect_uri")
+	if !c.ContainsURI(uri) {
+		err := templates.Render("error", w, map[string]any{"message": "Invalid redirect URI"})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 }
