@@ -16,10 +16,7 @@ func main() {
 
 	r.Use(httplog.RequestLogger(l))
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcome"))
-	})
-
+	r.Get("/", handlers.RootHandler)
 	r.Get("/authorize", handlers.AuthorizeHandler)
 
 	http.ListenAndServe(":9001", r)
