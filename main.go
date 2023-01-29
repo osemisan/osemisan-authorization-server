@@ -19,6 +19,7 @@ func main() {
 	r.Get("/", handlers.RootHandler)
 	r.Get("/authorize", handlers.AuthorizeHandler)
 	r.Post("/approve", handlers.ApproveHandler)
+	r.Post("/token", handlers.TokenHandler)
 
 	http.ListenAndServe(":9001", r)
 }

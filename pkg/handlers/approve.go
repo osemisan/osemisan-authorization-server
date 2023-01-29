@@ -18,6 +18,7 @@ func ApproveHandler(w http.ResponseWriter, r *http.Request) {
 
 	reqid := r.PostFormValue("reqid")
 	query := kvs.RequestsKVS[reqid]
+	delete(kvs.RequestsKVS, reqid)
 
 	if query == nil {
 		w.WriteHeader(http.StatusBadRequest)
