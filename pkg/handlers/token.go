@@ -1,12 +1,19 @@
 package handlers
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
 	"github.com/osemisan-authorization-server/pkg/clients"
+	"github.com/osemisan-authorization-server/pkg/jwt"
 	"github.com/osemisan-authorization-server/pkg/kvs"
 )
+
+type TokenResponse struct {
+	AccessToken string `json:"access_token"`
+	TokenType string `json:"Bearer"`
+}
 
 func TokenHandler(w http.ResponseWriter, r *http.Request) {
 	id, sec, ok := r.BasicAuth()
@@ -38,7 +45,21 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 			delete(kvs.CodesKVS, code)
 			expectedId := codeValues.Get("client_id")
 			if (expectedId == c.Id) {
-				// https://github.com/oauthinaction/oauth-in-action-code/blob/master/exercises/ch-5-ex-3/authorizationServer.js#L185
+				token, err := jwt.BuildJWT(c.Scope)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
+				response := TokenResponse{
+					AccessToken: token,
+				}
+				bytesRes, err := json.Marshal(response)
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
+				w.Header().Set("Content-Type", "application/json")
+				w.Write(bytesRes)
 			} else {
 				w.WriteHeader(http.StatusBadRequest)
 				w.Write([]byte(fmt.Sprintf("Client mismatch, expected %s, actual: %s", expectedId, c.Id)))
@@ -49,7 +70,6 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 			w.Write([]byte(fmt.Sprintf("Unkown code: %s", code)))
 			return
 		}
-	} else if g == "refresh_token"{
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
 		return
