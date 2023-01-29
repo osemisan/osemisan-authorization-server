@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/osemisan-authorization-server/pkg/clients"
-	"github.com/osemisan-authorization-server/pkg/jwt"
+	"github.com/osemisan-authorization-server/pkg/jwtutil"
 	"github.com/osemisan-authorization-server/pkg/kvs"
 )
 
@@ -45,7 +45,7 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 			delete(kvs.CodesKVS, code)
 			expectedId := codeValues.Get("client_id")
 			if (expectedId == c.Id) {
-				token, err := jwt.BuildJWT(c.Scope)
+				token, err := jwtutil.BuildJWT(c.Scope)
 				if err != nil {
 					http.Error(w, err.Error(), http.StatusInternalServerError)
 					return
