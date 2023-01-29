@@ -6,6 +6,8 @@ type Client struct {
 	Id string
 	Secret string
 	URIs []string
+	// セミの種類をスペースで区切った文字列
+	Scope string
 }
 
 type Clients []Client
@@ -15,6 +17,7 @@ var OsemisanClients = Clients{
 		"osemisan-client-id-1",
 		"osemisan-client-secret-1",
 		[]string{"http://localhost:9000"},
+		"abura kuma",
 	},
 }
 

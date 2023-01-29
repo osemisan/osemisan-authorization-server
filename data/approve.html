@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+  <title>osemisan認可サーバー</title>
+  <meta charset="utf-8" />
+</head>
+<body>
+  <h1>osemisan認可サーバー</h1>
+  <h2>このクライアントを許可しますか？</h2>
+  <div>
+    <p>クライアントID: {{ .clientId }}</p>
+    <p>スコープ: {{ .clientScope }}</p>
+  </div>
+  <form action="/approve" method="POST">
+    <input type="hidden" name="reqid" value="{{ .reqid }}" />
+    <input type="submit" name="approve" value="許可する" />
+    <input type="submit" name="deny" value="許可しない" />
+  </form>
+</body>
