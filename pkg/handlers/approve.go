@@ -40,7 +40,7 @@ func ApproveHandler(w http.ResponseWriter, r *http.Request) {
 			state := query.Get("state")
 
 			u, err := url.BuildURL(redirectURI, map[string]string{
-				"code": code,
+				"code":  code,
 				"state": state,
 			})
 			if err != nil {

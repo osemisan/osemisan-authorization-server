@@ -39,8 +39,8 @@ func AuthorizeHandler(w http.ResponseWriter, r *http.Request) {
 	kvs.RequestsKVS[reqid] = r.Form
 
 	err := templates.Render("approve", w, map[string]string{
-		"reqid": reqid,
-		"clientId": c.Id,
+		"reqid":       reqid,
+		"clientId":    c.Id,
 		"clientScope": c.Scope,
 	})
 	if err != nil {

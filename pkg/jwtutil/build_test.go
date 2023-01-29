@@ -13,8 +13,8 @@ const symKey = "hoge"
 
 func TestBuildJWT(t *testing.T) {
 	tests := []struct {
-		name  string
-		scope string
+		name      string
+		scope     string
 		wantScope string
 	}{
 		{

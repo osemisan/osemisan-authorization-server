@@ -19,14 +19,14 @@ func (e *BuildURLError) Unwrap() error {
 }
 
 func BuildURL(b string, qMap map[string]string) (string, error) {
-  u, err := url.Parse(b)
-  if err != nil {
-	return "", &BuildURLError{ msg: "parse URL", err: err }
-  }
-  q := u.Query()
-  for k, v := range qMap {
-	q.Set(k, v)
-  }
-  u.RawQuery = q.Encode()
-  return u.String(), nil
+	u, err := url.Parse(b)
+	if err != nil {
+		return "", &BuildURLError{msg: "parse URL", err: err}
+	}
+	q := u.Query()
+	for k, v := range qMap {
+		q.Set(k, v)
+	}
+	u.RawQuery = q.Encode()
+	return u.String(), nil
 }

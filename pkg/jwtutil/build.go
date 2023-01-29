@@ -31,15 +31,15 @@ func BuildJWT(scope string) (string, error) {
 		Claim("scope", scope).
 		Build()
 	if err != nil {
-		return "", &BuildJWTError{ msg: "build JWT", err: err }
+		return "", &BuildJWTError{msg: "build JWT", err: err}
 	}
 	key, err := jwk.FromRaw([]byte(symKey))
 	if err != nil {
-		return "", &BuildJWTError{ msg: "create key", err: err }
+		return "", &BuildJWTError{msg: "create key", err: err}
 	}
 	signed, err := jwt.Sign(tok, jwt.WithKey(jwa.HS256, key))
 	if err != nil {
-		return "", &BuildJWTError{ msg: "sign", err: err }
+		return "", &BuildJWTError{msg: "sign", err: err}
 	}
 	return fmt.Sprintf("%s", signed), nil
 }

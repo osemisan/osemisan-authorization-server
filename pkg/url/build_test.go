@@ -8,16 +8,16 @@ import (
 
 func TestBuild(t *testing.T) {
 	tests := []struct {
-		name string
-		base string
-		qMap map[string]string;
+		name    string
+		base    string
+		qMap    map[string]string
 		wantURL string
 	}{
 		{
-			name: "baseだけ渡したらそのまま帰ってくる",
-			base: "http://example.com",
-			qMap: map[string]string{},
-			wantURL:"http://example.com",
+			name:    "baseだけ渡したらそのまま帰ってくる",
+			base:    "http://example.com",
+			qMap:    map[string]string{},
+			wantURL: "http://example.com",
 		},
 		{
 			name: "クエリをmapで渡すとその通りに付与される",

@@ -23,12 +23,12 @@ func (e *RenderTemplateError) Unwrap() error {
 func Render(name string, w http.ResponseWriter, data any) error {
 	wd, err := os.Getwd()
 	if err != nil {
-		return &RenderTemplateError{ msg: "get working dir", err: err } 
+		return &RenderTemplateError{msg: "get working dir", err: err}
 	}
 	f := wd + "/data/" + name + ".html"
 	tmpl, err := template.ParseFiles(f)
 	if err != nil {
-		return &RenderTemplateError{ msg: "parse template file", err: err } 
+		return &RenderTemplateError{msg: "parse template file", err: err}
 	}
 	w.Header().Set("Content-Type", "text/html")
 	tmpl.Execute(w, data)

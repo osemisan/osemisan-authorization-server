@@ -3,9 +3,9 @@ package clients
 import "golang.org/x/exp/slices"
 
 type Client struct {
-	Id string
+	Id     string
 	Secret string
-	URIs []string
+	URIs   []string
 	// セミの種類をスペースで区切った文字列
 	Scope string
 }
@@ -21,13 +21,13 @@ var OsemisanClients = Clients{
 	},
 }
 
-func (cs Clients) Find (id string) int {
-	idx := slices.IndexFunc(cs, func (c Client) bool {
+func (cs Clients) Find(id string) int {
+	idx := slices.IndexFunc(cs, func(c Client) bool {
 		return c.Id == id
 	})
 	return idx
 }
 
-func (c Client) ContainsURI (uri string) bool {
+func (c Client) ContainsURI(uri string) bool {
 	return slices.Contains(c.URIs, uri)
 }

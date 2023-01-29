@@ -12,7 +12,7 @@ import (
 
 type TokenResponse struct {
 	AccessToken string `json:"access_token"`
-	TokenType string `json:"Bearer"`
+	TokenType   string `json:"Bearer"`
 }
 
 func TokenHandler(w http.ResponseWriter, r *http.Request) {
@@ -44,7 +44,7 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 		if codeValues != nil {
 			delete(kvs.CodesKVS, code)
 			expectedId := codeValues.Get("client_id")
-			if (expectedId == c.Id) {
+			if expectedId == c.Id {
 				token, err := jwtutil.BuildJWT(c.Scope)
 				if err != nil {
 					http.Error(w, err.Error(), http.StatusInternalServerError)
