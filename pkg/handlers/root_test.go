@@ -20,7 +20,7 @@ func TestRootHandler(t *testing.T) {
 	c := new(http.Client)
 
 	tests := []struct {
-		name string
+		name           string
 		wantStatusCode int
 	}{
 		{
