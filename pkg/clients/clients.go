@@ -10,7 +10,7 @@ type Client struct {
 
 type Clients []Client
 
-var clients = Clients{
+var OsemisanClients = Clients{
 	{
 		"osemisan-client-id-1",
 		"osemisan-client-secret-1",
@@ -18,9 +18,9 @@ var clients = Clients{
 	},
 }
 
-func (cs Clients) find (id string) Client {
+func (cs Clients) Find (id string) int {
 	idx := slices.IndexFunc(cs, func (c Client) bool {
 		return c.Id == id
 	})
-	return cs[idx]
+	return idx
 }
