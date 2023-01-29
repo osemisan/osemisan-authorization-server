@@ -9,7 +9,7 @@ import (
 	"github.com/osemisan-authorization-server/pkg/templates"
 )
 
-func AuthorizeHandler(w http.ResponseWriter, r *http.Request) {
+func AuthorizeGetHandler(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("client_id")
 	idx := clients.OsemisanClients.Find(id)
 	if idx == -1 {
