@@ -17,7 +17,8 @@ func main() {
 	r.Use(httplog.RequestLogger(l))
 
 	r.Get("/", handlers.RootHandler)
-	r.Get("/authorize", handlers.AuthorizeGetHandler)
+	r.Get("/authorize", handlers.AuthorizeHandler)
+	r.Post("/approve", handlers.ApproveHandler)
 
 	http.ListenAndServe(":9001", r)
 }
