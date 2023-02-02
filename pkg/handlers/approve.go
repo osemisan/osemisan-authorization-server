@@ -47,7 +47,7 @@ func ApproveHandler(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
-			http.Redirect(w, r, u, http.StatusPermanentRedirect)
+			http.Redirect(w, r, u, http.StatusFound)
 		}
 	} else {
 		redirectURI := query.Get("redirect_uri")
@@ -58,6 +58,6 @@ func ApproveHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		http.Redirect(w, r, u, http.StatusPermanentRedirect)
+		http.Redirect(w, r, u, http.StatusFound)
 	}
 }
