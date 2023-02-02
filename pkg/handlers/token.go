@@ -19,6 +19,7 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 	id, sec, ok := r.BasicAuth()
 	if !ok {
 		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Failed to basic auth"))
 		return
 	}
 
@@ -36,7 +37,7 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 
-	g := r.PostFormValue("grant_type")
+	g := r.FormValue("grant_type")
 
 	if g == "authorization_code" {
 		code := r.PostFormValue("code")
@@ -73,6 +74,7 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Invalid grant_type"))
 		return
 	}
 }
