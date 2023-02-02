@@ -16,7 +16,7 @@ var OsemisanClients = Clients{
 	{
 		"osemisan-client-id-1",
 		"osemisan-client-secret-1",
-		[]string{"http://localhost:9000"},
+		[]string{"http://localhost:9000/callback"},
 		"abura kuma",
 	},
 }
