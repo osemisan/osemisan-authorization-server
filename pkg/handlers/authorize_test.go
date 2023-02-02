@@ -14,10 +14,10 @@ import (
 
 func TestAuthorizeHandler(t *testing.T) {
 	tests := []struct {
-		name string
-		query url.Values
+		name              string
+		query             url.Values
 		wantTextInResHTML string
-		wantStatusCode int
+		wantStatusCode    int
 	}{
 		{
 			name: "不正なクライアントIDを渡すと、エラーページが表示される",
@@ -25,25 +25,25 @@ func TestAuthorizeHandler(t *testing.T) {
 				"client_id": {"invalid_client_id"},
 			},
 			wantTextInResHTML: "Unknown client",
-			wantStatusCode: http.StatusOK,
+			wantStatusCode:    http.StatusOK,
 		},
 		{
 			name: "不正なリダイレクトURIを渡すと、エラーページが表示される",
 			query: url.Values{
-				"client_id": {"osemisan-client-id-1"},
+				"client_id":    {"osemisan-client-id-1"},
 				"redirect_uri": {"invalid_redirect_uri"},
 			},
 			wantTextInResHTML: "Invalid redirect URI",
-			wantStatusCode: http.StatusOK,
+			wantStatusCode:    http.StatusOK,
 		},
 		{
 			name: "生成なクエリパラメータを渡すと、許可ページが表示される",
 			query: url.Values{
-				"client_id": {"osemisan-client-id-1"},
+				"client_id":    {"osemisan-client-id-1"},
 				"redirect_uri": {"http://localhost:9000/callback"},
 			},
 			wantTextInResHTML: "このクライアントを許可しますか？",
-			wantStatusCode: http.StatusOK,
+			wantStatusCode:    http.StatusOK,
 		},
 	}
 
