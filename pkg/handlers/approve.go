@@ -6,7 +6,7 @@ import (
 	"github.com/osemisan-authorization-server/pkg/kvs"
 	"github.com/osemisan-authorization-server/pkg/random"
 	"github.com/osemisan-authorization-server/pkg/templates"
-	"github.com/osemisan-authorization-server/pkg/url"
+	"github.com/osemisan-authorization-server/pkg/urlutil"
 )
 
 func ApproveHandler(w http.ResponseWriter, r *http.Request) {
@@ -39,7 +39,7 @@ func ApproveHandler(w http.ResponseWriter, r *http.Request) {
 			redirectURI := query.Get("redirect_uri")
 			state := query.Get("state")
 
-			u, err := url.BuildURL(redirectURI, map[string]string{
+			u, err := urlutil.BuildURL(redirectURI, map[string]string{
 				"code":  code,
 				"state": state,
 			})
@@ -51,7 +51,7 @@ func ApproveHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		redirectURI := query.Get("redirect_uri")
-		u, err := url.BuildURL(redirectURI, map[string]string{
+		u, err := urlutil.BuildURL(redirectURI, map[string]string{
 			"error": "unsupported_response_type",
 		})
 		if err != nil {

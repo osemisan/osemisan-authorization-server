@@ -1,9 +1,9 @@
-package url_test
+package urlutil_test
 
 import (
 	"testing"
 
-	"github.com/osemisan-authorization-server/pkg/url"
+	"github.com/osemisan-authorization-server/pkg/urlutil"
 )
 
 func TestBuild(t *testing.T) {
@@ -32,7 +32,7 @@ func TestBuild(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			a, err := url.BuildURL(tt.base, tt.qMap)
+			a, err := urlutil.BuildURL(tt.base, tt.qMap)
 			if err != nil {
 				t.Error("Failed to build URL", err)
 			}
