@@ -12,7 +12,7 @@ import (
 
 type TokenResponse struct {
 	AccessToken string `json:"access_token"`
-	TokenType   string `json:"Bearer"`
+	TokenType   string `json:"token_type"`
 }
 
 func TokenHandler(w http.ResponseWriter, r *http.Request) {
@@ -52,6 +52,7 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 				}
 				response := TokenResponse{
 					AccessToken: token,
+					TokenType: "Bearer",
 				}
 				bytesRes, err := json.Marshal(response)
 				if err != nil {
