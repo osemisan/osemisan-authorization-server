@@ -52,7 +52,7 @@ func TokenHandler(w http.ResponseWriter, r *http.Request) {
 				}
 				response := TokenResponse{
 					AccessToken: token,
-					TokenType: "Bearer",
+					TokenType:   "Bearer",
 				}
 				bytesRes, err := json.Marshal(response)
 				if err != nil {
